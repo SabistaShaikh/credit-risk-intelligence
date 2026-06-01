@@ -1,5 +1,9 @@
 import streamlit as st
+import pandas as pd
 import joblib
 
-st.title("Test")
-st.success("joblib imported successfully")
+st.title("Credit Risk Intelligence")
+
+model = joblib.load("xgboost_model.joblib")
+
+st.success("Model Loaded Successfully")
