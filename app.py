@@ -32,11 +32,21 @@ if st.button("Predict Risk"):
 
     st.subheader("Prediction Result")
 
-    if prediction == 1:
-        st.error("⚠️ High Credit Risk")
-    else:
-        st.success("✅ Low Credit Risk")
-
     if hasattr(model, "predict_proba"):
+
         probability = model.predict_proba(data)[0][1]
-        st.write(f"**Probability of Default:** {probability:.2%}")
+
+        st.write(f"### Probability of Default: {probability:.2%}")
+
+        if probability >= 0.70:
+            st.error("🔴 High Credit Risk")
+        elif probability >= 0.40:
+            st.warning("🟡 Medium Credit Risk")
+        else:
+            st.success("🟢 Low Credit Risk")
+
+    else:
+        if prediction == 1:
+            st.error("🔴 High Credit Risk")
+        else:
+            st.success("🟢 Low Credit Risk")
